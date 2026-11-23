@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "subsea-bridge"
+version = "0.1.0"
+description = "Python client tools for the SubseaSim underwater ROV simulator point-cloud stream"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = ["numpy>=1.24"]
+
+[project.optional-dependencies]
+viewer = ["rerun-sdk>=0.23"]
+dev = ["pytest>=7"]
+
+[project.scripts]
+subsea-mock-sim = "subsea_bridge.mock_sim:main"
+subsea-viewer = "subsea_bridge.viewer_rerun:main"
+subsea-recorder = "subsea_bridge.recorder:main"
+subsea-benchmark = "subsea_bridge.benchmark:main"
+subsea-ros2-bridge = "subsea_bridge.ros2_bridge:main"
+
+[tool.setuptools]
+packages = ["subsea_bridge"]
+
+[tool.setuptools.package-data]
+subsea_bridge = ["py.typed"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

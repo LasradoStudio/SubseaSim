@@ -1,0 +1,152 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" font-family="Segoe UI, Inter, Helvetica, Arial, sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#06121c"/>
+      <stop offset="1" stop-color="#020609"/>
+    </linearGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#5fd0d0"/>
+    </marker>
+    <marker id="arrowAmber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#f0b45a"/>
+    </marker>
+    <style>
+      .title { fill:#e6f6f6; font-size:30px; font-weight:700; }
+      .sub { fill:#7fa9ad; font-size:17px; }
+      .group { fill:#081a24; stroke:#1d4a56; stroke-width:1.5; }
+      .glabel { fill:#5fd0d0; font-size:15px; font-weight:700; letter-spacing:2px; }
+      .box { fill:#0c2733; stroke:#2b6b78; stroke-width:1.5; }
+      .hot { fill:#2a1d0c; stroke:#b98234; stroke-width:1.5; }
+      .dash { fill:#0a1a22; stroke:#3b5d66; stroke-width:1.5; stroke-dasharray:7 6; }
+      .h { fill:#e6f6f6; font-size:18px; font-weight:700; }
+      .t { fill:#9cc3c7; font-size:14.5px; }
+      .ta { fill:#e9c58c; font-size:14.5px; }
+      .wire { stroke:#5fd0d0; stroke-width:2; fill:none; }
+      .wireA { stroke:#f0b45a; stroke-width:2; fill:none; }
+      .thread { fill:#f0b45a; font-size:12.5px; font-weight:700; letter-spacing:1px; }
+    </style>
+  </defs>
+
+  <rect width="1600" height="900" rx="22" fill="url(#bg)"/>
+  <text x="56" y="70" class="title">SubseaSim architecture</text>
+  <text x="56" y="100" class="sub">One frame of simulation, left to right. Amber = runs off the game thread.</text>
+
+  <!-- Unreal plugin -->
+  <rect x="40" y="130" width="1080" height="730" rx="16" class="group"/>
+  <text x="66" y="162" class="glabel">UNREAL ENGINE 5.8  ·  SUBSEASIM PLUGIN (C++20)</text>
+
+  <!-- Vehicle loop -->
+  <rect x="66" y="185" width="640" height="300" rx="12" fill="none" stroke="#1d4a56" stroke-dasharray="4 5"/>
+  <text x="84" y="212" class="glabel" style="font-size:13px">VEHICLE  ·  GAME THREAD</text>
+
+  <rect x="84" y="232" width="190" height="104" rx="10" class="box"/>
+  <text x="100" y="262" class="h">Guidance</text>
+  <text x="100" y="286" class="t">Line-of-sight pipeline</text>
+  <text x="100" y="306" class="t">follow, station keep,</text>
+  <text x="100" y="326" class="t">manual</text>
+
+  <rect x="300" y="232" width="190" height="104" rx="10" class="box"/>
+  <text x="316" y="262" class="h">Control</text>
+  <text x="316" y="286" class="t">PID velocity / depth,</text>
+  <text x="316" y="306" class="t">vector-error attitude</text>
+  <text x="316" y="326" class="t">→ 6-DOF wrench</text>
+
+  <rect x="516" y="232" width="172" height="104" rx="10" class="box"/>
+  <text x="532" y="262" class="h">Allocation</text>
+  <text x="532" y="286" class="t">Damped pseudo-</text>
+  <text x="532" y="306" class="t">inverse, re-solved</text>
+  <text x="532" y="326" class="t">on thruster failure</text>
+
+  <rect x="516" y="362" width="172" height="104" rx="10" class="box"/>
+  <text x="532" y="392" class="h">8 thrusters</text>
+  <text x="532" y="416" class="t">First-order lag,</text>
+  <text x="532" y="436" class="t">asymmetric limits</text>
+
+  <rect x="84" y="362" width="406" height="104" rx="10" class="box"/>
+  <text x="100" y="392" class="h">Hydrodynamics → Chaos rigid body</text>
+  <text x="100" y="416" class="t">Buoyancy at centre of buoyancy, linear + quadratic</text>
+  <text x="100" y="436" class="t">drag on water-relative velocity, added mass, current</text>
+
+  <path d="M274 284 H300" class="wire" marker-end="url(#arrow)"/>
+  <path d="M490 284 H516" class="wire" marker-end="url(#arrow)"/>
+  <path d="M602 336 V362" class="wire" marker-end="url(#arrow)"/>
+  <path d="M516 414 H490" class="wire" marker-end="url(#arrow)"/>
+  <path d="M180 362 V336" class="wire" marker-end="url(#arrow)"/>
+
+  <!-- Environment -->
+  <rect x="730" y="185" width="370" height="300" rx="12" class="box"/>
+  <text x="750" y="216" class="h">World subsystem + site</text>
+  <text x="750" y="244" class="t">Water state shared by everything:</text>
+  <text x="750" y="264" class="t">density, current, turbidity</text>
+  <text x="750" y="296" class="t">Procedural site from one seed:</text>
+  <text x="750" y="316" class="t">seabed, pipeline with free spans,</text>
+  <text x="750" y="336" class="t">flanges, debris, manifold, boulders</text>
+  <text x="750" y="368" class="t">Turbidity drives fog and sensor</text>
+  <text x="750" y="388" class="t">degradation together</text>
+  <text x="750" y="420" class="t">Remote commands: mode, faults,</text>
+  <text x="750" y="440" class="t">camera, recording, fps cap</text>
+
+  <!-- Sensors -->
+  <rect x="66" y="510" width="1034" height="200" rx="12" fill="none" stroke="#1d4a56" stroke-dasharray="4 5"/>
+  <text x="84" y="537" class="glabel" style="font-size:13px">SENSORS  ·  NEVER BLOCK THE GAME OR RENDER THREAD</text>
+
+  <rect x="84" y="555" width="490" height="138" rx="10" class="hot"/>
+  <text x="100" y="584" class="h">Depth camera → point cloud</text>
+  <text x="100" y="610" class="ta">Scene capture → non-blocking GPU readback (render thread)</text>
+  <text x="100" y="632" class="ta">→ parallel un-projection on the task graph (row bands,</text>
+  <text x="100" y="654" class="ta">seeded noise, deterministic) → range noise, attenuation</text>
+  <text x="100" y="676" class="ta">~59k points / cloud · 1.1 ms CPU · 10 Hz</text>
+
+  <rect x="600" y="555" width="482" height="138" rx="10" class="hot"/>
+  <text x="616" y="584" class="h">Imaging sonar</text>
+  <text x="616" y="610" class="ta">256 beams × 16 rays as engine async traces (workers)</text>
+  <text x="616" y="632" class="ta">→ footprint-spread echoes, Lambert + specular backscatter,</text>
+  <text x="616" y="654" class="ta">absorption, beam overlap, speckle → 8-bit image + fan</text>
+  <text x="616" y="676" class="ta">4,096 rays / ping · ~8 ms ping-to-image · 10 Hz</text>
+
+  <!-- Stream server -->
+  <rect x="84" y="735" width="1016" height="104" rx="10" class="hot"/>
+  <text x="100" y="766" class="h">Sensor stream server (own thread)</text>
+  <text x="100" y="792" class="ta">Lock-free MPSC hand-off · shared immutable frames · drops bulky frames for slow clients</text>
+  <text x="100" y="814" class="ta">Binary protocol in ROS conventions: point clouds, transforms, telemetry, sonar images, commands</text>
+
+  <path d="M330 693 V735" class="wireA" marker-end="url(#arrowAmber)"/>
+  <path d="M840 693 V735" class="wireA" marker-end="url(#arrowAmber)"/>
+  <path d="M1100 787 H1135 V237 H1172" class="wireA" marker-end="url(#arrowAmber)"/>
+  <text x="1108" y="770" class="thread">TCP</text>
+
+  <!-- Python side -->
+  <rect x="1150" y="130" width="410" height="730" rx="16" class="group"/>
+  <text x="1176" y="162" class="glabel">PYTHON BRIDGE</text>
+
+  <rect x="1176" y="185" width="358" height="104" rx="10" class="box"/>
+  <text x="1192" y="216" class="h">Stream client + decoder</text>
+  <text x="1192" y="242" class="t">Zero-copy numpy, resync on the</text>
+  <text x="1192" y="262" class="t">magic header, auto-reconnect</text>
+
+  <rect x="1176" y="314" width="358" height="104" rx="10" class="box"/>
+  <text x="1192" y="345" class="h">Rerun live viewer</text>
+  <text x="1192" y="371" class="t">Cloud on the moving vehicle, fused</text>
+  <text x="1192" y="391" class="t">map, sonar, telemetry plots</text>
+
+  <rect x="1176" y="443" width="358" height="104" rx="10" class="box"/>
+  <text x="1192" y="474" class="h">Recorder + map export</text>
+  <text x="1192" y="500" class="t">.ssim capture, voxel map,</text>
+  <text x="1192" y="520" class="t">PLY / PCD, offline renders</text>
+
+  <rect x="1176" y="572" width="358" height="104" rx="10" class="box"/>
+  <text x="1192" y="603" class="h">Smoke, scenario, benchmark</text>
+  <text x="1192" y="629" class="t">Fault injection, turbidity, 30 / 60 fps</text>
+  <text x="1192" y="649" class="t">checks against the live sim</text>
+
+  <rect x="1176" y="701" width="358" height="138" rx="10" class="box"/>
+  <text x="1192" y="732" class="h">ROS 2 bridge → RViz2</text>
+  <text x="1192" y="758" class="t">PointCloud2, Odometry, TF + static</text>
+  <text x="1192" y="778" class="t">sensor mounts, sonar Image</text>
+  <text x="1192" y="804" class="t">ROS 2 Jazzy in WSL, run live</text>
+
+  <path d="M1355 289 V314" class="wire" marker-end="url(#arrow)"/>
+  <path d="M1355 418 V443" class="wire" marker-end="url(#arrow)"/>
+  <path d="M1355 547 V572" class="wire" marker-end="url(#arrow)"/>
+  <path d="M1355 676 V701" class="wire" marker-end="url(#arrow)"/>
+</svg>

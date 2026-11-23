@@ -1,0 +1,15 @@
+[
+  {"label": "settle", "wait": 10, "print_telemetry": ["sonar_ms", "sonar_rays", "points", "fps"]},
+  {"label": "chase + HUD", "commands": [{"cmd": "screenshot", "name": "p_chase"}], "wait": 2},
+  {"label": "fpv", "commands": [{"cmd": "camera", "shot": "fpv"}, {"cmd": "hud", "visible": false}], "wait": 2},
+  {"label": "fpv shot", "commands": [{"cmd": "screenshot", "name": "p_fpv"}], "wait": 1.5},
+  {"label": "orbit", "commands": [{"cmd": "camera", "shot": "orbit", "orbit_dps": 0}], "wait": 1.5},
+  {"label": "orbit shot", "commands": [{"cmd": "screenshot", "name": "p_orbit"}], "wait": 1.5},
+  {"label": "wide", "commands": [{"cmd": "camera", "shot": "wide", "orbit_dps": 0}], "wait": 1.5},
+  {"label": "wide shot", "commands": [{"cmd": "screenshot", "name": "p_wide"}], "wait": 1.5},
+  {"label": "flyby", "commands": [{"cmd": "camera", "shot": "flyby"}], "wait": 9},
+  {"label": "flyby shot", "commands": [{"cmd": "screenshot", "name": "p_flyby"}], "wait": 1.5},
+  {"label": "fault + hud", "commands": [{"cmd": "camera", "shot": "chase"}, {"cmd": "hud", "visible": true}, {"cmd": "fail_thruster", "index": 0, "failed": true}], "wait": 4},
+  {"label": "fault shot", "commands": [{"cmd": "screenshot", "name": "p_fault"}], "wait": 1.5},
+  {"label": "restore", "commands": [{"cmd": "fail_thruster", "index": 0, "failed": false}], "wait": 1}
+]

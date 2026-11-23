@@ -1,0 +1,20 @@
+# Unreal
+Binaries/
+Intermediate/
+Saved/
+DerivedDataCache/
+Plugins/*/Binaries/
+Plugins/*/Intermediate/
+*.sln
+.vs/
+.vscode/
+
+# Python
+Bridge/.venv/
+Bridge/**/__pycache__/
+Bridge/*.egg-info/
+Bridge/.pytest_cache/
+
+# Recordings
+*.rrd
+*.ssim

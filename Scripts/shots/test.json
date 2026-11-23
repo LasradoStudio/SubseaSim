@@ -1,0 +1,1 @@
+[{"label":"settle","wait":6},{"label":"rec","commands":[{"cmd":"hud","visible":false},{"cmd":"record","name":"t0","frames":30}],"until_frames":["t0",30]}]

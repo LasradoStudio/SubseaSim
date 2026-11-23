@@ -1,0 +1,27 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "0.1.0",
+	"FriendlyName": "Subsea Sim",
+	"Description": "Reusable subsea robotics simulation: Fossen-style hydrodynamics, thruster allocation, GPU depth camera to point cloud, and a TCP sensor stream for ROS 2 / Rerun.",
+	"Category": "Simulation",
+	"CanContainContent": true,
+	"Modules": [
+		{
+			"Name": "SubseaSim",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		},
+		{
+			"Name": "SubseaSimEditor",
+			"Type": "Editor",
+			"LoadingPhase": "PostEngineInit"
+		}
+	],
+	"Plugins": [
+		{
+			"Name": "ProceduralMeshComponent",
+			"Enabled": true
+		}
+	]
+}

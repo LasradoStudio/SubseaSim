@@ -1,0 +1,16 @@
+[
+  {"label": "settle (real-time when idle)", "commands": [{"cmd": "pace", "realtime": true}], "wait": 4},
+  {"label": "A wide establishing", "commands": [{"cmd": "hud", "visible": false}, {"cmd": "camera", "shot": "wide", "orbit_dps": 5}, {"cmd": "record", "name": "A_wide", "frames": 270}], "until_frames": ["A_wide", 270]},
+  {"label": "B chase with HUD", "commands": [{"cmd": "hud", "visible": true}, {"cmd": "camera", "shot": "chase"}, {"cmd": "record", "name": "B_chase_hud", "frames": 300}], "until_frames": ["B_chase_hud", 300]},
+  {"label": "C onboard camera", "commands": [{"cmd": "hud", "visible": false}, {"cmd": "camera", "shot": "fpv"}, {"cmd": "record", "name": "C_fpv", "frames": 240}], "until_frames": ["C_fpv", 240]},
+  {"label": "D flyby", "commands": [{"cmd": "camera", "shot": "flyby"}, {"cmd": "record", "name": "D_flyby", "frames": 300}], "until_frames": ["D_flyby", 300]},
+  {"label": "E orbit", "commands": [{"cmd": "camera", "shot": "orbit", "orbit_dps": 14}, {"cmd": "record", "name": "E_orbit", "frames": 300}], "until_frames": ["E_orbit", 300]},
+  {"label": "F thruster fault", "commands": [{"cmd": "hud", "visible": true}, {"cmd": "camera", "shot": "chase"}, {"cmd": "fail_thruster", "index": 0, "failed": true}, {"cmd": "record", "name": "F_fault", "frames": 270}], "until_frames": ["F_fault", 270]},
+  {"label": "restore", "commands": [{"cmd": "fail_thruster", "index": 0, "failed": false}]},
+  {"label": "G silt cloud, onboard", "commands": [{"cmd": "hud", "visible": false}, {"cmd": "camera", "shot": "fpv"}, {"cmd": "set_turbidity", "value": 0.8, "ramp_s": 8}, {"cmd": "record", "name": "G_turbid", "frames": 330}], "until_frames": ["G_turbid", 330]},
+  {"label": "clear water", "commands": [{"cmd": "set_turbidity", "value": 0.15}]},
+  {"label": "H side", "commands": [{"cmd": "camera", "shot": "side"}, {"cmd": "record", "name": "H_side", "frames": 210}], "until_frames": ["H_side", 210]},
+  {"label": "fast-forward to the manifold", "commands": [{"cmd": "camera", "shot": "chase"}], "until_telemetry": ["waypoint", 74]},
+  {"label": "I manifold wide", "commands": [{"cmd": "camera", "shot": "wide", "orbit_dps": 6}, {"cmd": "record", "name": "I_manifold", "frames": 330}], "until_frames": ["I_manifold", 330]},
+  {"label": "J top-down", "commands": [{"cmd": "camera", "shot": "top"}, {"cmd": "record", "name": "J_top", "frames": 180}], "until_frames": ["J_top", 180]}
+]

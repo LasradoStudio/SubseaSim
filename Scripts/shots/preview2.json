@@ -1,0 +1,10 @@
+[
+  {"label": "settle", "wait": 10},
+  {"label": "chase + HUD", "commands": [{"cmd": "screenshot", "name": "q_chase"}], "wait": 2},
+  {"label": "orbit", "commands": [{"cmd": "camera", "shot": "orbit", "orbit_dps": 0}, {"cmd": "hud", "visible": false}], "wait": 1.5},
+  {"label": "orbit shot", "commands": [{"cmd": "screenshot", "name": "q_orbit"}], "wait": 1.5},
+  {"label": "side", "commands": [{"cmd": "camera", "shot": "side"}], "wait": 1.5},
+  {"label": "side shot", "commands": [{"cmd": "screenshot", "name": "q_side"}], "wait": 1.5},
+  {"label": "flyby", "commands": [{"cmd": "camera", "shot": "flyby"}], "wait": 8},
+  {"label": "flyby shot", "commands": [{"cmd": "screenshot", "name": "q_flyby"}], "wait": 1.5}
+]

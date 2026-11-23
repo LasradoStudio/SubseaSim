@@ -1,0 +1,5 @@
+[
+  {"label": "settle", "commands": [{"cmd": "pace", "realtime": true}, {"cmd": "hud", "visible": false}], "wait": 4},
+  {"label": "fly to the end of the pipeline", "until_telemetry": ["waypoint", 77], "timeout": 900},
+  {"label": "I2 manifold", "commands": [{"cmd": "camera", "shot": "wide", "orbit_dps": 3, "yaw_offset": 150}, {"cmd": "record", "name": "I2_manifold", "frames": 390}], "until_frames": ["I2_manifold", 390]}
+]

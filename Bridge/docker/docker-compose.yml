@@ -1,0 +1,49 @@
+# SubseaSim ROS 2 bridge + RViz2.  NOTE: untested on the development machine (no Docker there).
+#
+#   cd Bridge/docker
+#   docker compose up --build
+#
+# The simulator (Unreal plugin or `python -m subsea_bridge.mock_sim --host 0.0.0.0`) runs on
+# the host; the containers reach it at host.docker.internal:9870. Override with
+#   SUBSEA_HOST=192.168.1.20 SUBSEA_PORT=9870 docker compose up
+#
+# Display:
+#   * Linux / inside a WSL2 distro with WSLg: the defaults work (run `xhost +local:` first on
+#     a bare X11 Linux desktop).
+#   * Docker Desktop on Windows started from PowerShell: point the X socket at WSLg's copy:
+#       $env:X11_SOCKET_DIR = "/run/desktop/mnt/host/wslg/.X11-unix"; docker compose up
+#   * No GPU passthrough: keep LIBGL_ALWAYS_SOFTWARE=1 (default here).
+
+x-ros-env: &ros-env
+  ROS_DOMAIN_ID: ${ROS_DOMAIN_ID:-42}
+  RMW_IMPLEMENTATION: rmw_fastrtps_cpp
+
+services:
+  bridge:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: subsea-bridge:latest
+    environment:
+      <<: *ros-env
+      SUBSEA_HOST: ${SUBSEA_HOST:-host.docker.internal}
+      SUBSEA_PORT: ${SUBSEA_PORT:-9870}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    command: ["python3", "-m", "subsea_bridge.ros2_bridge", "--ros-args", "-r", "__ns:=/subsea"]
+    restart: unless-stopped
+
+  rviz:
+    image: subsea-bridge:latest
+    depends_on:
+      - bridge
+    environment:
+      <<: *ros-env
+      DISPLAY: ${DISPLAY:-:0}
+      WAYLAND_DISPLAY: ${WAYLAND_DISPLAY:-}
+      XDG_RUNTIME_DIR: /tmp/runtime-root
+      QT_X11_NO_MITSHM: "1"
+      LIBGL_ALWAYS_SOFTWARE: ${LIBGL_ALWAYS_SOFTWARE:-1}
+    volumes:
+      - ${X11_SOCKET_DIR:-/tmp/.X11-unix}:/tmp/.X11-unix:rw
+    command: ["rviz2", "-d", "/opt/subsea/rviz/subsea.rviz"]

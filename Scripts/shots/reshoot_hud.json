@@ -1,0 +1,8 @@
+[
+  {"label": "settle", "commands": [{"cmd": "pace", "realtime": true}], "wait": 6},
+  {"label": "B2 chase with HUD", "commands": [{"cmd": "hud", "visible": true}, {"cmd": "camera", "shot": "chase"}, {"cmd": "record", "name": "B2_chase_hud", "frames": 300}], "until_frames": ["B2_chase_hud", 300]},
+  {"label": "F2 thruster fault", "commands": [{"cmd": "fail_thruster", "index": 0, "failed": true}, {"cmd": "record", "name": "F2_fault", "frames": 270}], "until_frames": ["F2_fault", 270]},
+  {"label": "restore", "commands": [{"cmd": "fail_thruster", "index": 0, "failed": false}], "wait": 1},
+  {"label": "E2 orbit", "commands": [{"cmd": "hud", "visible": false}, {"cmd": "camera", "shot": "orbit", "orbit_dps": 13}, {"cmd": "record", "name": "E2_orbit", "frames": 330}], "until_frames": ["E2_orbit", 330]},
+  {"label": "D2 flyby", "commands": [{"cmd": "camera", "shot": "flyby"}, {"cmd": "record", "name": "D2_flyby", "frames": 330}], "until_frames": ["D2_flyby", 330]}
+]

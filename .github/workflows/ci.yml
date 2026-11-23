@@ -1,0 +1,59 @@
+# The Python and Docker jobs run on GitHub-hosted runners. The Unreal job needs a self-hosted
+# Windows runner with the engine and MSVC installed (Epic's licence does not allow the engine on
+# hosted runners): label it `unreal` and set the repository variable UE_ROOT to the engine folder.
+# Until UE_ROOT is set the job is skipped, so it never sits queued waiting for a runner.
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  bridge:
+    name: Python bridge (${{ matrix.os }}, py${{ matrix.python }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python: ['3.10', '3.12']
+    defaults:
+      run:
+        working-directory: Bridge
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - run: python -m pip install -e ".[dev]"
+      - run: python -m pytest -q
+
+  ros2-image:
+    name: ROS 2 bridge image builds
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -f Bridge/docker/Dockerfile -t subsea-bridge Bridge
+
+  unreal:
+    name: Unreal build and automation tests
+    if: ${{ vars.UE_ROOT != '' }}
+    runs-on: [self-hosted, windows, unreal]
+    env:
+      UE_ROOT: ${{ vars.UE_ROOT }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build
+        shell: pwsh
+        run: ./Scripts/build.ps1
+      - name: Test (headless, -nullrhi)
+        shell: pwsh
+        run: ./Scripts/test.ps1
+      - name: Upload benchmark and logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: unreal-results
+          path: |
+            Saved/Benchmarks/
+            Saved/Logs/tests.log
