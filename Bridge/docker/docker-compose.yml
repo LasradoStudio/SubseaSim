@@ -1,4 +1,4 @@
-# SubseaSim ROS 2 bridge + RViz2.  NOTE: untested on the development machine (no Docker there).
+# SubseaSim ROS 2 bridge + RViz2.  CI builds the image; running this compose file has not been tried.
 #
 #   cd Bridge/docker
 #   docker compose up --build

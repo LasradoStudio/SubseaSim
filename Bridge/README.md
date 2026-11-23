@@ -109,8 +109,8 @@ Rerun `.rrd` output).
 
 `ros2_bridge.py` targets ROS 2 Jazzy and has been run live against the Unreal sim with RViz2, in
 Ubuntu 24.04 under WSL (see the top-level README and `Scripts/wsl/`). The byte layout it publishes
-is produced by `pointcloud2.pack_pointcloud2`, which is unit tested. The `Dockerfile` and
-`docker-compose.yml` have not been run.
+is produced by `pointcloud2.pack_pointcloud2`, which is unit tested. CI builds the `Dockerfile`
+image on every push; running the container and `docker-compose.yml` has not been tried.
 
 On a machine with ROS 2 Jazzy:
 

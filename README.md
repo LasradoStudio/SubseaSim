@@ -1,5 +1,7 @@
 # SubseaSim
 
+[![ci](https://github.com/LasradoStudio/SubseaSim/actions/workflows/ci.yml/badge.svg)](https://github.com/LasradoStudio/SubseaSim/actions/workflows/ci.yml)
+
 A subsea ROV digital twin in Unreal Engine 5.8: a BlueROV2-Heavy-class vehicle flies an autonomous
 pipeline inspection in a procedurally generated site, while a GPU depth camera streams coloured
 point clouds and a forward-looking imaging sonar streams images, both to robotics tooling (Rerun today, ROS 2 / RViz2 via the included bridge).
@@ -146,7 +148,8 @@ Notes from getting it running:
 - **Footage.** `Scripts/wsl/record_ros2_demo.ps1` records both windows at once (Desktop Duplication
   for Unreal, x11grab for RViz2) and `Scripts/make_ros2_clip.py` composes them side by side.
 
-The Docker setup in `Bridge/docker` (same bridge, same RViz config) has still not been run.
+The Docker setup in `Bridge/docker` (same bridge, same RViz config): CI builds the image on every
+push, but running it (`docker compose up` with RViz2 in a container) has not been tried.
 
 ## Layout
 

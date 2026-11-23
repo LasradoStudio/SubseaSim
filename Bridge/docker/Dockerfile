@@ -1,7 +1,7 @@
 # ROS 2 Jazzy bridge + RViz2 for SubseaSim.
 # Build context is the Bridge/ directory (see docker-compose.yml):
 #   docker build -f docker/Dockerfile -t subsea-bridge .
-# NOTE: untested on the development machine (no Docker there).
+# CI builds this image on every push; running the container has not been tried.
 FROM ros:jazzy
 
 ENV DEBIAN_FRONTEND=noninteractive
