@@ -125,7 +125,7 @@ mounts) and the sonar as `sensor_msgs/Image` (`sonar/raw` polar mono8, `sonar/im
 
 ```powershell
 wsl --install -d Ubuntu-24.04                                       # once (WSL itself needs admin)
-wsl -d Ubuntu-24.04 -u root -- bash /mnt/e/Rendergene/Unreal/SubseaSim/Scripts/wsl/setup_ros2.sh  # once
+wsl -d Ubuntu-24.04 -u root -- bash Scripts/wsl/setup_ros2.sh  # once, from the repo root
 .\Scripts\run_demo.ps1 -NoViewer -BindAll       # the sim, listening where WSL can reach it
 .\Scripts\wsl\run_ros2.ps1                      # bridge + RViz2
 ```

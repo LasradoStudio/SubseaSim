@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Report what the SubseaSim ROS 2 bridge is publishing: topics, rates, one TF lookup.
-#   wsl -d Ubuntu-24.04 -u root -- bash /mnt/e/Rendergene/Unreal/SubseaSim/Scripts/wsl/ros2_check.sh
+#   wsl -d Ubuntu-24.04 -u root -- bash Scripts/wsl/ros2_check.sh   (from the repo root)
 source /opt/ros/jazzy/setup.bash
 export ROS_DOMAIN_ID=${ROS_DOMAIN_ID:-42}
 

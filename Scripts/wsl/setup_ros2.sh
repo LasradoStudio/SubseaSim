@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Install ROS 2 Jazzy desktop (includes RViz2) in a WSL Ubuntu 24.04 distro.
-# Run as root:  wsl -d Ubuntu-24.04 -u root -- bash /mnt/e/Rendergene/Unreal/SubseaSim/Scripts/wsl/setup_ros2.sh
+# Run as root:  wsl -d Ubuntu-24.04 -u root -- bash Scripts/wsl/setup_ros2.sh   (from the repo root)
 set -euo pipefail
 export DEBIAN_FRONTEND=noninteractive
 
