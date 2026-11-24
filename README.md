@@ -209,6 +209,10 @@ published BlueROV2 Heavy values and are plain properties, ready to be replaced b
 - The sonar is a ray-traced approximation: no multipath, no surface reverberation, no beam sidelobes beyond neighbour overlap.
 - The camera fill light in the external shots is presentation lighting, not part of the vehicle.
 
+## How this was built
+
+Built with Claude Code (Anthropic) as an AI pair programmer, so every commit carries a `Co-Authored-By` line. Every figure under [Measured results](#measured-results) comes from an actual run, not an estimate.
+
 ## Licence
 
 MIT, see [`LICENSE`](LICENSE). Unreal Engine itself is under Epic's own licence and is not included.
