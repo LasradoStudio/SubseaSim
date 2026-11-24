@@ -211,7 +211,7 @@ published BlueROV2 Heavy values and are plain properties, ready to be replaced b
 
 ## How this was built
 
-Built with Claude Code (Anthropic) as an AI pair programmer, so every commit carries a `Co-Authored-By` line. Every figure under [Measured results](#measured-results) comes from an actual run, not an estimate.
+Designed and directed by Neil Lasrado, using Claude Code (Anthropic) as an AI pair programmer; commits carry a `Co-Authored-By` line for it. Every figure under [Measured results](#measured-results) comes from an actual run, not an estimate.
 
 ## Licence
 
